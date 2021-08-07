@@ -68,3 +68,7 @@ Distances between nodes are available in the same format in
 shortest streamline connecting each pair of nodes averaged across all
 tractography datasets.
 
+## Examples
+
+Examples for using `braingraphgeo` with the sample data are available
+as jupyter notebooks in `examples/`
