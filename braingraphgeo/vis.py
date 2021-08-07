@@ -69,8 +69,7 @@ def label_rect(rect, text, ax, rotation=0):
     return ax
 
 
-def connectivity_matrix(data, parcellation, vmin, vmax,
-                        ticklabels=None, cmap='inferno'):
+def connectivity_matrix(data, parcellation, vmin, vmax, cmap='inferno'):
     '''
     Function for generating a labeled connectivity matrix figure
     in a similar style to Figure 3 in "A mesoscale connectome of
@@ -90,8 +89,6 @@ def connectivity_matrix(data, parcellation, vmin, vmax,
         Minimum display value
     vmax : float
         Maximum display value
-    ticklabels : list-like of length 2
-        Custom ticklabels for colorbar. Defaults to [vmin,vmax]
     cmap : str
         Matplotlib colormap. Default is 'inferno'
 
@@ -201,8 +198,7 @@ def connectivity_matrix(data, parcellation, vmin, vmax,
                       borderpad=0)
     cbar = fig.colorbar(im, cax=cbax, orientation='horizontal',
                         ticks=[vmin, vmax])
-    if ticklabels is not None:
-        cbar.ax.set_xticklabels(ticklabels, fontdict={'fontsize': 13})
+    cbar.ax.set_xticklabels([vmin, vmax], fontdict={'fontsize': 13})
     cbar.ax.set_title(r'Log$_{10}$', fontsize=13)
 
     return fig, ax
