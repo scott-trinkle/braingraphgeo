@@ -38,9 +38,8 @@ adjacency matrices in `.csv` files. Nodes are defined as anatomical regions
 detailed in the [Allen Mouse Brain
 Atlas](https://mouse.brain-map.org/static/atlas). "XXX-I" and "XXX-C" in the
 column and index titles of the data files represent ipsilateral and
-contralateral nodes, respectively. For access to the Allen brain atlas acronyms
-and structure masks, I recommend using the
-[allensdk](https://allensdk.readthedocs.io/en/latest/):
+contralateral nodes, respectively. For access to the Allen brain atlas I
+recommend using the [allensdk](https://allensdk.readthedocs.io/en/latest/):
 
 ```
 from allensdk.core.mouse_connectivity_cache import MouseConnectivityCache
@@ -48,6 +47,10 @@ from allensdk.core.mouse_connectivity_cache import MouseConnectivityCache
 mcc = MouseConnectivityCache()
 tree = mcc.get_structure_tree()
 ```
+
+Parcellation information for the 286 nodes in the datasets is also available in
+`data/parcellation.csv` which contains columns for Allen ID, Acronym, Full Name,
+and Brain Division. 
 
 Edge weights for the tracer data (`data/tracer.csv`) are defined using the
 normalized connection density metric from the [Knox computational
@@ -68,3 +71,4 @@ Distances between nodes are available in the same format in
 `data/fiber_distances.csv`.  Distances are measured in mm and represent the
 shortest streamline connecting each pair of nodes averaged across all
 tractography datasets.
+
