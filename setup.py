@@ -7,10 +7,10 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 DEPENDENCIES = ['numpy', 'pandas', 'matplotlib==3.4.2',
-                'scipy', 'seaaborn', 'networkx', 'fury']
+                'scipy', 'seaborn', 'networkx', 'fury']
 
 setup(name='braingraphgeo',
-      version='0.2',
+      version='0.3',
       description='Python package for performing analysis on structural brain networks using random geometric surrogate graphs',
       long_description=long_description,
       long_description_content_type='text/markdown',
@@ -19,7 +19,7 @@ setup(name='braingraphgeo',
       license='MIT',
       install_requires=DEPENDENCIES,
       url='https://github.com/scott-trinkle/braingraphgeo',
-      download_url='https://github.com/scott-trinkle/braingraphgeo/archive/refs/tags/0.2.tar.gz',
+      download_url='https://github.com/scott-trinkle/braingraphgeo/archive/refs/tags/0.3.tar.gz',
       keywords=['tractography', 'brain network', 'graph theory'],
       packages=['braingraphgeo'],
       classifiers=[
