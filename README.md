@@ -26,6 +26,28 @@ and run (preferably in a virtual environment):
 
 `pip install -e .`
 
+## Usage
+
+The primary utility of `braingraphgeo` is the creation of geometric surrogate
+graphs for statistical analysis of brain networks:
+
+```
+from braingraphgeo.surrogates import geomsurr
+
+W = np.load(data_path)  # 2D weighted connectivity matrix
+D = np.load(distance_path)  # 2D array of node distances
+
+Wgeo = geomsurr(W,D)  # geometric surrogate connectivity matrix
+```
+
+The package also includes a number of useful utilities for creating additional
+random graphs, loading data, and generating useful data visualizations. It also
+integrates well with external graph theory packages such as
+[networkx](https://networkx.org).
+
+Examples for using `braingraphgeo` with the sample data are available
+as Jupyter notebooks in `examples/`
+
 ## Data
 
 Example data represent weighted structural brain graphs derived from neural
@@ -69,8 +91,3 @@ Distances between nodes are available in the same format in
 `data/fiber_distances.csv`.  Distances are measured in mm and represent the
 shortest streamline connecting each pair of nodes averaged across all
 tractography datasets.
-
-## Examples
-
-Examples for using `braingraphgeo` with the sample data are available
-as jupyter notebooks in `examples/`
