@@ -17,11 +17,11 @@ def geomsurr(W, D, nmean=3, nstd=2):
     W : ndarray
         Weighted connectivity matrix
     D : ndarray
-        physical distance between nodes
+        Physical distance between nodes
     nmean : int
-        polynomial order to preserve mean
+        Polynomial order to preserve mean. Default is 3.
     nstd : int
-        polynomial order to preserve standard deviation
+        Polynomial order to preserve standard deviation. Default is 2.
 
     Returns
     _______
@@ -149,7 +149,9 @@ def strength_correct(W, ss, nreps=9):
     W : ndarray
         Weighted connectivity matrix
     ss : ndarray
-        desired strength sequence
+        Desired strength sequence
+    nreps : int
+        Number of repetitions for iterative procedure. Default is 9.
 
     Returns
     _______
