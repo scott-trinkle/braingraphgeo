@@ -40,8 +40,8 @@ D = np.load(distance_path)  # 2D array of node distances
 Wgeo = geomsurr(W,D)  # geometric surrogate connectivity matrix
 ```
 
-The package also includes a number of useful utilities for creating additional
-random graphs, loading data, and generating useful data visualizations. It also
+The package also includes a number of utilities for creating additional random
+graphs, loading data, and generating useful data visualizations. It also
 integrates well with external graph theory packages such as
 [networkx](https://networkx.org).
 
