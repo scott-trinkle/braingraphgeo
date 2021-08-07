@@ -262,7 +262,35 @@ def plot_spearman_correlation_matrix(corr):
     return fig, ax
 
 
-def vis_strongest_nodes(positions, edges, out_path, n_nodes=85, density=30):
+def vis_strongest_nodes(positions, edges, out_path, n_nodes=85, density=30.):
+    '''
+    Function for generating a network diagram of hub-node connectivity in
+    physical coordinates. Saves results to three .pngs along the three major
+    axes: coronal, sagittal, and axial. Built with fury, which is a wrapper
+    for vtk.
+
+    Parameters
+    __________
+    positions : 2D ndarray, shape=(n_nodes,3)
+        Gives the 3D coordinates of the nodes
+    edges : ndarray
+        2D Connectivity matrix
+    out_path : str
+        Path to save three output images
+    n_nodes : int
+        The function will plot connections between the top n_nodes strongest
+        nodes. Default is 85.
+    density : float
+        For visual clarity, only the top density% of edges will be retained
+        before plotting. Default is 30.
+
+    Returns
+    _______
+    fig : matplotlib.figure.Figure
+        Matplotlib figure
+    ax : matplotlib.axes._subplots.AxesSubplot
+        Figure ax
+    '''
 
     # Get node strengths
     s = edges.sum(0)
