@@ -64,7 +64,7 @@ def label_rect(rect, text, ax, rotation=0):
     cx = rx + rect.get_width() / 2.0
     cy = ry + rect.get_height() / 2.0
     ax.annotate(text, (cx, cy), ha='center', va='center',
-                rotation=rotation)
+                rotation=rotation, fontsize=17.5)
 
     return ax
 
@@ -253,6 +253,7 @@ def plot_spearman_correlation_matrix(corr):
                      ax=ax)
     ax.axvline(12, color='k', lw=2.5)
     ax.xaxis.tick_top()
+    ax.set_xticks(np.arange(24))
     ax.set_xticklabels(target_labs, rotation=45, fontsize=20)
     ax.set_yticklabels(division_labs, rotation=0, fontsize=20)
     cbar = ax.collections[0].colorbar
