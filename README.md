@@ -81,6 +81,9 @@ model](https://direct.mit.edu/netn/article/3/1/217/2194/High-resolution-data-dri
 Edge weights for the dense (`data/tract_dense_n*.csv`) and endpoint
 (`data/tract_endpoint_n*.csv`) tractography graphs represent raw streamline
 counts between nodes, normalized by the product of the two node volumes.
+Tractography graphs were constructed from diffusion MRI data of postmortem mouse
+brains. All diffusion MRI data were collected at the University of Chicago, and
+tractography was performed with [MRTrix3](https://www.mrtrix.org).
 
 For fair comparison between tractography (based on an inherently symmetric
 diffusion metric) and tracers (based on injections to a single hemisphere),
