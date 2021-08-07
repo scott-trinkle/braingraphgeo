@@ -3,14 +3,11 @@ import numpy as np
 
 def geomsurr(W, D, nmean=3, nstd=2):
     '''
-    Produces a random graph that preserves low-order distance effects.
+    Produces a random graph that preserves low-order distance effects
+    and node strength distribution.
 
     Directly adapted from Roberts et al. (2016) NeuroImage 123:379-393,
     available as Matlab code at http://www.sng.org.au/Downloads.
-
-    Scott Trinkle,
-    University of Chicago
-    2021
 
     Parameters
     __________
@@ -85,10 +82,6 @@ def randomsurr(W):
     '''
     Produces a random graph that preserves node strength sequence.
 
-    Scott Trinkle,
-    University of Chicago
-    2021
-
     Parameters
     __________
     W : ndarray
@@ -97,7 +90,7 @@ def randomsurr(W):
     Returns
     _______
     Wrs : ndarray
-        Random surrogate connectivity matrix that preserves node strength 
+        Random surrogate connectivity matrix that preserves node strength
         sequence
     '''
 
