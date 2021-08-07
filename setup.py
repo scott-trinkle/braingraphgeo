@@ -18,6 +18,7 @@ setup(name='braingraphgeo',
       license='MIT',
       install_requires=DEPENDENCIES,
       url='https://github.com/scott-trinkle/braingraphgeo',
+      download_url='https://github.com/scott-trinkle/braingraphgeo/archive/refs/tags/v_0.1.tar.gz',
       keywords=['tractography', 'brain network', 'graph theory'],
       packages=['braingraphgeo'],
       classifiers=[
