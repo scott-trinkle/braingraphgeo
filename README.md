@@ -26,10 +26,6 @@ and run (preferably in a virtual environment):
 
 `pip install -e .`
 
-and install requirements:
-
-`pip install -r requirements.txt`
-
 ## Data
 
 Example data represent weighted structural brain graphs derived from neural
