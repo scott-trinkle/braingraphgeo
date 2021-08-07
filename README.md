@@ -14,6 +14,12 @@ post](http://scotttrinkle.com/news/brain-networks/)
 
 ## Installation
 
+`braingraphgeo` can be installed with pip:
+
+```
+pip install braingraphgeo
+```
+
 For local installation, first clone the repo:
 
 `git clone https://github.com/scott-trinkle/braingraphgeo.git`
