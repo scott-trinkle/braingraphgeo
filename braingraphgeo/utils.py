@@ -121,3 +121,15 @@ def check_parcellation(parcellation):
         if parcel_acro not in brain_divisions:
             raise ValueError(
                 f'Parcellation contains unknown acronym: {parcel_acro}')
+
+
+def to_density(W, density):
+    offdiag = np.diag(np.ones(W.shape[0])) == 0
+    thresh = np.percentile(W[offdiag], 100 - density)
+    W[W < thresh] = 0
+    return W
+
+
+def rescale(a):
+    shift = a - a.min()
+    return shift / shift.max()

@@ -6,7 +6,8 @@ def readme():
         return f.read()
 
 
-DEPENDENCIES = ['numpy', 'pandas', 'matplotlib==3.4.2', 'scipy', 'seaaborn']
+DEPENDENCIES = ['numpy', 'pandas', 'matplotlib==3.4.2',
+                'scipy', 'seaaborn', 'networkx', 'fury']
 
 setup(name='braingraphgeo',
       version='0.1',

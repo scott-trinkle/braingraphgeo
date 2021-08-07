@@ -4,7 +4,10 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib import cm
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-from .utils import check_parcellation
+import networkx as nx
+from fury import actor, window, colormap as fury_cm
+
+from .utils import check_parcellation, to_density, rescale
 
 COLORS = {'ipsi': '#d4d8de',
           'contra': '#c0c4cb',
@@ -180,10 +183,11 @@ def connectivity_matrix(data, parcellation, vmin, vmax, cmap='inferno'):
         label_rect(tgt_r_rect, TEXT[division], ax, rotation=rotation)
 
         tgt_l_rect = ax.add_patch(
-            patches.Rectangle(xy=(nx // 2 + buff - 0.5 + np.where(masks[division])[0][0],
-                                  hemilabel_dx-0.5),
-                              width=masks[division].sum(
-            ),
+            patches.Rectangle(
+                xy=(nx // 2 + buff - 0.5 + np.where(masks[division])[0][0],
+                    hemilabel_dx-0.5),
+                width=masks[division].sum(
+                ),
                 height=structlabel_dx,
                 facecolor=COLORS[division]))
 
@@ -256,3 +260,77 @@ def plot_spearman_correlation_matrix(corr):
     cbar.ax.tick_params(labelsize=18)
     fig.tight_layout()
     return fig, ax
+
+
+def vis_strongest_nodes(positions, edges, out_path, n_nodes=85, density=30):
+
+    # Get node strengths
+    s = edges.sum(0)
+    n = s.size
+    topinds = np.argpartition(s, -n_nodes)[-n_nodes:]  # hub mask
+
+    # Get node colormap
+    node_colors = fury_cm.create_colormap(rescale(s), name='Reds')
+
+    # Set node radii
+    node_radii = np.ones(n)
+    node_radii[topinds] = 2
+
+    # Draw nodes
+    sphere_actor = actor.sphere(centers=positions,
+                                colors=node_colors,
+                                radii=node_radii,
+                                theta=16,
+                                phi=16)
+
+    # Cut off weak edges
+    edges = to_density(edges, density)
+
+    # Set hub-hub edge mask
+    indicator = np.zeros(n)
+    indicator[topinds] = 1
+    hub_mask = np.outer(indicator, indicator).astype(bool)
+
+    # Get line coordinates
+    hub = []
+    G = nx.from_numpy_array(edges)
+    for i, (source, target) in enumerate(G.edges):
+        if hub_mask[source, target]:
+            hub.append([positions[source], positions[target]])
+
+    # Plot hub=hub connections
+    hub_actor = actor.line(hub,
+                           colors=(10/255, 146/255, 170/255),
+                           opacity=0.9,
+                           fake_tube=False,
+                           linewidth=2)
+
+    # Add all drawings
+    scene = window.Scene()
+    scene.SetBackground(1, 1, 1)
+    scene.add(sphere_actor)
+    scene.add(hub_actor)
+
+    # Axial view
+    ax = ((56.95265197753906, 62.10136151313782, 298.74040937106),
+          (56.95265197753906, 62.10136151313782, 39.182297468185425),
+          (0.0, 1.0, 0.0))
+
+    # Sagittal view
+    sag = ((314.91325665203874, 56.29049421834477, 67.34208638488903),
+           (56.95265197753906, 62.10136151313782, 39.182297468185425),
+           (0, 0, 1.0))
+
+    # Coronal view
+    cor = ((51.835648827121794, 320.87046418270796, 58.747093325219794),
+           (56.95265197753906, 62.10136151313782, 39.182297468185425),
+           (0, 0, 1))
+
+    # Save all
+    for view, name in zip([ax, sag, cor], ['ax', 'sag', 'cor']):
+        scene.set_camera(*view)
+        window.record(scene,
+                      size=(1000, 1000),
+                      magnification=2,
+                      reset_camera=False,
+                      out_path=out_path + name + '.png')

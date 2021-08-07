@@ -48,6 +48,8 @@ Parcellation information for the 286 nodes in the datasets is also available in
 `data/parcellation.csv` which contains columns for Allen ID, Acronym, Full Name,
 and Brain Division. 
 
+Node locations in 3D physical coordinates are available in `data/node_positions.csv`
+
 Edge weights for the tracer data (`data/tracer.csv`) are defined using the
 normalized connection density metric from the [Knox computational
 model](https://direct.mit.edu/netn/article/3/1/217/2194/High-resolution-data-driven-model-of-the-mouse)
