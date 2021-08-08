@@ -16,7 +16,7 @@ post](http://scotttrinkle.com/news/brain-networks/)
 
 ## Installation
 
-`braingraphgeo` can be installed with pip:
+braingraphgeo can be installed with pip:
 
 ```
 pip install braingraphgeo
@@ -36,7 +36,7 @@ and run (preferably in a virtual environment):
 
 ## Usage
 
-The primary utility of `braingraphgeo` is the creation of geometric surrogate
+The primary utility of braingraphgeo is the creation of geometric surrogate
 graphs for statistical analysis of brain networks:
 
 ```
@@ -53,7 +53,7 @@ graphs, loading data, and generating useful data visualizations. It also
 integrates well with external graph theory packages such as
 [networkx](https://networkx.org).
 
-Examples for using `braingraphgeo` with the sample data are available
+Examples for using braingraphgeo with the sample data are available
 as Jupyter notebooks in `examples/`
 
 ## Data
