@@ -7,7 +7,7 @@ using random geometric surrogate graphs.
 
 Data and examples stem from a manuscript currently under review at NeuroImage:
 
-Trinkle, S., Foxley, S., Wildenberg, G., Kasthuri, N., La Riviere, P., “The role
+Trinkle, S., Foxley, S., Wildenberg, G., Kasthuri, N., La Rivière, P., “The role
 of spatial embedding in mouse brain networks constructed from diffusion
 tractography and tracer injections,” *Under review at NeuroImage, 2021.*
 
