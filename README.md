@@ -1,5 +1,7 @@
 # Braingraphgeo
 
+![](imgs/demo.jpg)
+
 Braingraphgeo is a package for performing analysis on structural brain networks
 using random geometric surrogate graphs.
 
