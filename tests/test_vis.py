@@ -2,7 +2,6 @@ import pytest
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from numpy.testing import assert_array_equal, assert_array_almost_equal
 
 from context import braingraphgeo as bgg
 
@@ -34,6 +33,15 @@ def download_dict():
             'corr_matrix': download_spearman_matrix}
 
 
+def assert_close(a, b):
+    mismatch = np.sum(a != b)
+    ratio = mismatch / a.size
+    if ratio <= 0.01:
+        assert True
+    if ratio > 0.01:
+        assert False
+
+
 @pytest.mark.filterwarnings('ignore::DeprecationWarning')
 @pytest.mark.parametrize('figure_str', ['connectivity_matrix', 'corr_matrix'])
 def test_figures(root_dir, figure_str):
@@ -43,7 +51,7 @@ def test_figures(root_dir, figure_str):
         f'{root_dir}/tests/test_{figure_str}.png')
     true_img = plt.imread(
         f'{root_dir}/tests/benchmarks/{figure_str}.png')
-    assert_array_equal(true_img, test_img)
+    assert_close(true_img, test_img)
 
 
 def test_corr_wrong_shape():
