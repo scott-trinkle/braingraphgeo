@@ -14,7 +14,7 @@ def download_connectivity_matrix(root_dir):
     parcel = pd.read_csv(f'{root_dir}/data/parcellation.csv')
     with np.errstate(divide='ignore'):
         fig, ax = bgg.vis.connectivity_matrix(np.log10(W), parcel, -7.5, -2.5)
-    fig.savefig(f'{root_dir}/tests/imgs/test_connectivity_matrix.png')
+    fig.savefig(f'{root_dir}/tests/test_connectivity_matrix.png')
 
 
 def download_spearman_matrix(root_dir):
@@ -26,7 +26,7 @@ def download_spearman_matrix(root_dir):
 
     corr = bgg.utils.build_spearman_correlation_matrix(tracer, tract, parcel)
     fig, ax = bgg.vis.plot_spearman_correlation_matrix(corr)
-    fig.savefig(f'{root_dir}/tests/imgs/test_corr_matrix.png')
+    fig.savefig(f'{root_dir}/tests/test_corr_matrix.png')
 
 
 def download_dict():
@@ -40,7 +40,7 @@ def test_figures(root_dir, figure_str):
     download_func = download_dict()[figure_str]
     download_func(root_dir)
     test_img = plt.imread(
-        f'{root_dir}/tests/imgs/test_{figure_str}.png')
+        f'{root_dir}/tests/test_{figure_str}.png')
     true_img = plt.imread(
         f'{root_dir}/tests/benchmarks/{figure_str}.png')
     assert_array_equal(true_img, test_img)
