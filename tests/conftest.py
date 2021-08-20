@@ -1,5 +1,5 @@
+import os
 import pytest
-
 import numpy as np
 import pandas as pd
 
@@ -92,3 +92,9 @@ def sample_D():
     D = pd.DataFrame(full, columns=labels, index=labels)
 
     return D
+
+
+@pytest.fixture(scope='package')
+def root_dir():
+    root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    return root

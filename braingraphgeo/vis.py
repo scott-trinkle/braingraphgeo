@@ -110,6 +110,7 @@ def connectivity_matrix(data, parcellation, vmin, vmax, cmap='inferno'):
     # 12 major brain divisions in Allen Atlas
     brain_divisions = ['Isocortex', 'OLF', 'HPF', 'CTXsp', 'STR',
                        'PAL', 'TH', 'HY', 'MB', 'P', 'MY', 'CB']
+    brain_divisions = parcellation['Brain Division'].unique()
 
     # Maps nodes to brain divisions
     masks = {}
