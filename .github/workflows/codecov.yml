@@ -7,13 +7,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
-      with:
-	python-version: 3.9
+      with: python-version: 3.9
     - name: Generate Report
       run: |
         pip install coverage pytest
         coverage run -m pytest
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v1
-      with:
-	fail_ci_if_error: true
+      with: fail_ci_if_error: true
