@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def geomsurr(W, D, nmean=3, nstd=2):
+def geomsurr(W, D, nmean=3, nstd=2, rs=None):
     '''
     Produces a random graph that preserves low-order distance effects
     and node strength distribution.
@@ -19,6 +19,8 @@ def geomsurr(W, D, nmean=3, nstd=2):
         Polynomial order to preserve mean. Default is 3.
     nstd : int
         Polynomial order to preserve standard deviation. Default is 2.
+    rs : int
+        Use to set random state. Default to none.
 
     Returns
     _______
@@ -26,6 +28,9 @@ def geomsurr(W, D, nmean=3, nstd=2):
         Geometric surrogate connectivity matrix that preserves low-order
         distance effects and node strength distribution
     '''
+
+    if rs is not None:
+        np.random.seed(rs)
 
     # Check if directed
     drct = 0 if np.max(W - W.T) == 0 else 1
@@ -62,7 +67,7 @@ def geomsurr(W, D, nmean=3, nstd=2):
     mnsurr = stdsurr + np.polyval(p1, d)
 
     # Use surrogate weights as a scaffold to reorder the original weights
-    surrlogw = rank_reorder(logw, mnsurr)
+    surrlogw = _rank_reorder(logw, mnsurr)
     Wwp[nz] = np.exp(surrlogw)
 
     if drct == 0:
@@ -72,13 +77,13 @@ def geomsurr(W, D, nmean=3, nstd=2):
     # Adjust node strengths
     str_W = W.sum(0)
     str_Wwp = Wwp.sum(0)
-    str_Wsp = rank_reorder(str_W, str_Wwp)
-    Wsp = strength_correct(Wwp, str_Wsp)
+    str_Wsp = _rank_reorder(str_W, str_Wwp)
+    Wsp = _strength_correct(Wwp, str_Wsp)
 
     return Wsp
 
 
-def randomsurr(W):
+def randomsurr(W, rs):
     '''
     Produces a random graph that preserves node strength sequence.
 
@@ -86,6 +91,8 @@ def randomsurr(W):
     __________
     W : ndarray
         Weighted connectivity matrix
+    rs : int
+        Use to set random state. Default to none.
 
     Returns
     _______
@@ -93,6 +100,9 @@ def randomsurr(W):
         Random surrogate connectivity matrix that preserves node strength
         sequence
     '''
+
+    if rs is not None:
+        np.random.seed(rs)
 
     # Check if directed
     drct = 0 if np.max(W - W.T) == 0 else 1
@@ -122,11 +132,11 @@ def randomsurr(W):
 
     # Adjust node strength sequence
     str_W = W.sum(0)
-    Wrs = strength_correct(Wrs, str_W)
+    Wrs = _strength_correct(Wrs, str_W)
     return Wrs
 
 
-def strength_correct(W, ss, nreps=9):
+def _strength_correct(W, ss, nreps=9):
     '''
     Rescales weights in W to make strength sequence converge to ss
 
@@ -162,7 +172,7 @@ def strength_correct(W, ss, nreps=9):
     return sW
 
 
-def rank_reorder(x, scaffold):
+def _rank_reorder(x, scaffold):
     '''
     Reorders the values in x according to the values in scaffold
 

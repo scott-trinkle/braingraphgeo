@@ -66,13 +66,14 @@ def build_spearman_correlation_matrix(mat1, mat2, parcellation):
     # Check inputs
     check_parcellation(parcellation)
 
-    if mat1.shape != mat1.shape:
+    if mat1.shape != mat2.shape:
         raise ValueError('mat1 and mat2 do not have the same shape')
     N_nodes = mat1.shape[1]
     N_per_hemi = N_nodes//2
 
-    brain_divisions = ['Isocortex', 'OLF', 'HPF', 'CTXsp', 'STR',
-                       'PAL', 'TH', 'HY', 'MB', 'P', 'MY', 'CB']
+    # brain_divisions = ['Isocortex', 'OLF', 'HPF', 'CTXsp', 'STR',
+    #                    'PAL', 'TH', 'HY', 'MB', 'P', 'MY', 'CB']
+    brain_divisions = np.unique(parcellation['Brain Division'])
     N_div = len(brain_divisions)
 
     # Maps nodes to brain divisions
@@ -124,12 +125,44 @@ def check_parcellation(parcellation):
 
 
 def to_density(W, density):
+    '''
+    Utility function to threshold a connectivity matrix W to a desired
+    density.
+
+    Parameters
+    __________
+    W : ndarray
+        Connectivity matrix.
+    density : float/int in [0,100]
+        Desired network density (as percent)
+
+    Returns
+    _______
+    W : ndarray
+        Input matrix W with low weights set to zero such that the network
+        density is `density`
+    '''
+
     offdiag = np.diag(np.ones(W.shape[0])) == 0
     thresh = np.percentile(W[offdiag], 100 - density)
-    W[W < thresh] = 0
-    return W
+    W_thr = np.zeros_like(W)
+    W_thr[W >= thresh] = W[W >= thresh]
+    return W_thr
 
 
 def rescale(a):
+    '''
+    Utility function to rescale an array from 0-1
+
+    Parameters
+    __________
+    a : ndarray
+
+    Returns
+    _______
+    scaled : ndarray
+        a scaled to be in 0-1
+    '''
     shift = a - a.min()
-    return shift / shift.max()
+    scaled = shift / shift.max()
+    return scaled

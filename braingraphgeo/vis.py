@@ -42,7 +42,7 @@ TEXT = {'ipsi': 'Ipsilateral Target',
         'CB':  'CB'}
 
 
-def label_rect(rect, text, ax, rotation=0):
+def _label_rect(rect, text, ax, rotation=0):
     '''
     Utility function for labeling a Rectangle object.
 
@@ -147,9 +147,9 @@ def connectivity_matrix(data, parcellation, vmin, vmax, cmap='inferno'):
                                     width=hemilabel_dx,
                                     height=ny,
                                     facecolor=COLORS['source'])
-    label_rect(ipsi_rect, TEXT['ipsi'], ax)
-    label_rect(contra_rect, TEXT['contra'], ax)
-    label_rect(source_rect, TEXT['source'], ax, rotation=90)
+    _label_rect(ipsi_rect, TEXT['ipsi'], ax)
+    _label_rect(contra_rect, TEXT['contra'], ax)
+    _label_rect(source_rect, TEXT['source'], ax, rotation=90)
 
     # Adds white rect for colorbar
     corner_rect = patches.Rectangle(xy=(-0.5, -0.5), width=buff,
@@ -165,7 +165,7 @@ def connectivity_matrix(data, parcellation, vmin, vmax, cmap='inferno'):
                               height=masks[division].sum(
             ),
                 facecolor=COLORS[division]))
-        label_rect(src_rect, TEXT[division], ax)
+        _label_rect(src_rect, TEXT[division], ax)
 
         # Rotate so they will fit
         if division in ['OLF', 'HPF', 'CTXsp', 'STR', 'PAL']:
@@ -180,7 +180,7 @@ def connectivity_matrix(data, parcellation, vmin, vmax, cmap='inferno'):
             ),
                 height=structlabel_dx,
                 facecolor=COLORS[division]))
-        label_rect(tgt_r_rect, TEXT[division], ax, rotation=rotation)
+        _label_rect(tgt_r_rect, TEXT[division], ax, rotation=rotation)
 
         tgt_l_rect = ax.add_patch(
             patches.Rectangle(
@@ -191,7 +191,7 @@ def connectivity_matrix(data, parcellation, vmin, vmax, cmap='inferno'):
                 height=structlabel_dx,
                 facecolor=COLORS[division]))
 
-        label_rect(tgt_l_rect, TEXT[division], ax, rotation=rotation)
+        _label_rect(tgt_l_rect, TEXT[division], ax, rotation=rotation)
 
     fig.tight_layout()
 
