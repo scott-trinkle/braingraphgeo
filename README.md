@@ -1,5 +1,7 @@
 # Braingraphgeo
 
+[![codecov](https://codecov.io/gh/scott-trinkle/braingraphgeo/branch/main/graph/badge.svg?token=1J4RIJJ2AE)](https://codecov.io/gh/scott-trinkle/braingraphgeo)
+
 ![](imgs/demo.jpg)
 
 Braingraphgeo is a package for performing analysis on structural brain networks
