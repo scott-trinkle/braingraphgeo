@@ -29,38 +29,20 @@ def download_spearman_matrix(root_dir):
     fig.savefig(f'{root_dir}/tests/imgs/test_corr_matrix.png')
 
 
-def download_node_figures(root_dir):
-    positions = pd.read_csv(
-        f'{root_dir}/data/node_positions.csv').loc[:, 'x':'z'].values
-    edges = bgg.utils.load_connectivity_matrix(
-        f'{root_dir}/data/tracer.csv').values
-    out_path = f'{root_dir}/tests/imgs/test_nodes_'
-    bgg.vis.vis_strongest_nodes(positions, edges, out_path)
-
-
 def download_dict():
     return {'connectivity_matrix': download_connectivity_matrix,
-            'corr_matrix': download_spearman_matrix,
-            'nodes': download_node_figures}
+            'corr_matrix': download_spearman_matrix}
 
 
 @pytest.mark.filterwarnings('ignore::DeprecationWarning')
-@pytest.mark.parametrize('figure_str', ['connectivity_matrix', 'corr_matrix', 'nodes'])
+@pytest.mark.parametrize('figure_str', ['connectivity_matrix', 'corr_matrix'])
 def test_figures(root_dir, figure_str):
     download_func = download_dict()[figure_str]
     download_func(root_dir)
-    if figure_str == 'nodes':
-        for plane in ['ax', 'sag', 'cor']:
-            test_img = plt.imread(
-                f'{root_dir}/tests/imgs/test_{figure_str}_{plane}.png')
-            true_img = plt.imread(
-                f'{root_dir}/tests/benchmarks/{figure_str}_{plane}.png')
-            assert_array_equal(true_img, test_img)
-    else:
-        test_img = plt.imread(
-            f'{root_dir}/tests/imgs/test_{figure_str}.png')
-        true_img = plt.imread(
-            f'{root_dir}/tests/benchmarks/{figure_str}.png')
+    test_img = plt.imread(
+        f'{root_dir}/tests/imgs/test_{figure_str}.png')
+    true_img = plt.imread(
+        f'{root_dir}/tests/benchmarks/{figure_str}.png')
     assert_array_equal(true_img, test_img)
 
 
