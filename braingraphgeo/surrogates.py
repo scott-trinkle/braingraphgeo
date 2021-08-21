@@ -83,7 +83,7 @@ def geomsurr(W, D, nmean=3, nstd=2, rs=None):
     return Wsp
 
 
-def randomsurr(W, rs):
+def randomsurr(W, rs=None):
     '''
     Produces a random graph that preserves node strength sequence.
 

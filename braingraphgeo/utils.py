@@ -71,8 +71,6 @@ def build_spearman_correlation_matrix(mat1, mat2, parcellation):
     N_nodes = mat1.shape[1]
     N_per_hemi = N_nodes//2
 
-    # brain_divisions = ['Isocortex', 'OLF', 'HPF', 'CTXsp', 'STR',
-    #                    'PAL', 'TH', 'HY', 'MB', 'P', 'MY', 'CB']
     brain_divisions = np.unique(parcellation['Brain Division'])
     N_div = len(brain_divisions)
 
