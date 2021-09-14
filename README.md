@@ -7,7 +7,7 @@
 Braingraphgeo is a package for performing analysis on structural brain networks
 using random geometric surrogate graphs.
 
-Data and examples stem from a manuscript currently under review at NeuroImage:
+Data and examples stem from a manuscript published in NeuroImage:
 
 Trinkle, S., Foxley, S., Wildenberg, G., Kasthuri, N., La Rivière, P., “[The
 role of spatial embedding in mouse brain networks constructed from diffusion
