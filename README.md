@@ -9,9 +9,11 @@ using random geometric surrogate graphs.
 
 Data and examples stem from a manuscript currently under review at NeuroImage:
 
-Trinkle, S., Foxley, S., Wildenberg, G., Kasthuri, N., La Rivière, P., “The role
-of spatial embedding in mouse brain networks constructed from diffusion
-tractography and tracer injections,” *Under review at NeuroImage, 2021.*
+Trinkle, S., Foxley, S., Wildenberg, G., Kasthuri, N., La Rivière, P., “[The
+role of spatial embedding in mouse brain networks constructed from diffusion
+tractography and tracer
+injections](https://www.sciencedirect.com/science/article/pii/S1053811921008491?via%3Dihub),”
+vol. 244, p. 118576, 2021.
 
 For more information, see [my blog
 post](http://scotttrinkle.com/news/brain-networks/)
